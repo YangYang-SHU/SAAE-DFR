@@ -18,7 +18,7 @@ import tqdm
 
 import joblib
 from sklearn.decomposition import PCA
-from transformer_autoencoder import SAAE
+from autoencoder import SAAE
 
 from utils import *
 
@@ -516,8 +516,8 @@ class AnoSegDFR():
         ref: skimage.filters.threshold_otsu
         skimage.filters.threshold_li
         e.g.
-        thresh = filters.threshold_otsu(image) #返回一个阈值
-        dst =(image <= thresh)*1.0 #根据阈值进行分割
+        thresh = filters.threshold_otsu(image) #return a threshold
+        dst =(image <= thresh)*1.0 #segemtation with the threshold
         """
         from skimage.filters import threshold_li
         from skimage.filters import threshold_otsu

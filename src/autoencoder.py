@@ -146,24 +146,6 @@ class Decoder(nn.Module):
         return x
 
 
-class TansformerAutoencoder(nn.Module):
-    def __init__(self, encoder, decoder, dim, depth, heads, 
-                                dim_head, mlp_dim, dropout):
-        super().__init__()
-        self.encoder = encoder(dim, depth, heads, dim_head, mlp_dim, dropout)
-        self.decoder = decoder(dim, depth, heads, dim_head, mlp_dim, dropout)
-
-    def encode(self, src_emb, src_mask=None):
-        return self.encoder(src_emb, src_mask)
-    
-    def decode(self, target_emb, memory, src_mask=None, target_mask=None):
-        return self.decoder(target_emb, memory, src_mask, target_mask)
-    
-    def forward(self, src_emb, target_emb, src_mask=None, target_mask=None):
-        return self.decode(target_emb, self.encode(src_emb, src_mask), src_mask, target_mask)
-
-
-
 class SAAE(nn.Module):
     def __init__(self, *, image_size, patch_size, dim, depth, heads, mlp_dim, in_channels, latent_dim, is_bn=True, channels = 3, dim_head = 64, dropout = 0., emb_dropout = 0.):
         super().__init__()
@@ -237,9 +219,10 @@ class SAAE(nn.Module):
 
         x = self.decoder(decoder_input_emb, memory)
         
-        # 将embedding转换成patch
+        # conver embedding to patches
         x = self.embedding_to_patch(x)
-        # 将patch组成完整图像
+        
+	# patches to image
         x = rearrange(x, 'b (h w) (p1 p2 c) -> b c (h p1) (w p2)', p1 = p, p2 = p, 
                                                                  h=img.size()[2]//p)
 
