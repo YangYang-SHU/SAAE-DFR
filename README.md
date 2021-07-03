@@ -42,6 +42,10 @@ We use pretrained ViT-B16 in the paper. You can get it at https://github.com/asy
 ## Qualitative Results
 ![qualitative result](https://github.com/YangYang-SHU/SAAE-DFR/blob/main/figs/qualitative_result.png)
 
+The first row is input image, the second row is ground truth anomaly segmentation and the third is the
+anomaly score map produced by our model. The last row is the segmentation result when FPR of 0 for texture classes and FPR of 0.001 for object classes on
+corresponding training set are given.
+
 ## Reference
 https://github.com/YoungGod/DFR
 
