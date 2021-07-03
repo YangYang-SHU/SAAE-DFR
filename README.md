@@ -6,6 +6,11 @@ The MVTec AD dataset is available at:
 
 https://www.mvtec.com/company/research/datasets/mvtec-ad
 
+## Pretrained-ViT
+You can get pretrained-ViT at https://github.com/asyml/vision-transformer-pytorch. 
+
+We use ViT-B_16 in the paper.
+
 ## Train
     python main.py --mode train --device cuda:0 --batch_size 32 --epochs 700
     
