@@ -40,7 +40,7 @@ We use pretrained ViT-B16 in the paper. You can get it at https://github.com/asy
 |      Mean     |    97.9   |    93.6   |
 
 ## Qualitative Results
-!(https://github.com/YangYang-SHU/SAAE-DFR/blob/main/figs/qualitative_results.png)
+![qualitative result](https://github.com/YangYang-SHU/SAAE-DFR/blob/main/figs/qualitative_result.png)
 
 ## Reference
 https://github.com/YoungGod/DFR
