@@ -187,13 +187,14 @@ class TestDataset(Dataset):
             mask = np.zeros((384, 384))
         else:
             if "wine" in self.img_files[idx]:
-                mask_path = img_name.replace("test", "ground_truth").split(".")[-2] + ".png"
+                mask_path = img_name.replace("test", "ground_truth").rpartition(".")[0] + ".png"
                 mask = imread(mask_path, as_gray=True)
                 mask = resize(mask, (384, 384))
             else:
-                mask_path = img_name.replace("test", "ground_truth").split(".")[-2] + "_mask.png"
+                mask_path = img_name.replace("test", "ground_truth").rpartition(".")[0] + "_mask.png"
                 mask = imread(mask_path, as_gray=True)
                 mask = resize(mask, (384, 384))
+            
         return img, mask, img_name
 
     def _get_image_files(self, path, ext={'.jpg', '.png'}):
@@ -258,7 +259,7 @@ class ValTestDataset(Dataset):
         if img_name.split('/')[-2] == "good":
             mask = np.zeros((384, 384))
         else:
-            mask_path = img_name.replace("test", "ground_truth").split(".")[-2] + "_mask.png"
+            mask_path = img_name.replace("test", "ground_truth").rpartition(".")[0] + "_mask.png"
             mask = imread(mask_path)
             mask = resize(mask, (384, 384))
         return img, mask, img_name
@@ -329,7 +330,7 @@ class TrainTestDataset(Dataset):
         img_name = self.img_files[idx]
 
         # mask corresponds to abnormal image
-        mask_path = img_name.replace("test", "ground_truth").split(".")[-2] + "_mask.png"
+        mask_path = img_name.replace("test", "ground_truth").rpartition(".")[0] + "_mask.png"
         mask = imread(mask_path)
         mask = resize(mask, (384, 384), mode='constant')
 
